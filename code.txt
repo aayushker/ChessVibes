@@ -1,0 +1,24 @@
+chess-app/
+├── frontend/      # Next.js app
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── ChessBoardComponent.tsx
+│   │   ├── GameControls.tsx
+│   │   └── GameInfo.tsx
+│   ├── public/
+│   ├── package.json
+│   ├── next.config.js
+│   └── tsconfig.json
+│
+├── backend/       # FastAPI app
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── models.py  # Pydantic models
+│   │   └── chess_logic.py # Core chess logic and AI
+│   ├── requirements.txt
+│   └── venv/ (optional, for virtual environment)
+│
+└── docker-compose.yml (Optional, for easy running)
