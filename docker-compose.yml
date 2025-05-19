@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app # For hot-reloading on backend code changes
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      PYTHONUNBUFFERED: 1 # For seeing print statements immediately
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src # For hot-reloading on frontend code changes
+      - ./frontend/public:/app/public
+      - ./frontend/components:/app/components
+      - ./frontend/app:/app/app
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000 # Use service name for inter-container communication
+      # CHOKIDAR_USEPOLLING: "true" # Uncomment if hot-reloading isn't working in Docker
+    stdin_open: true # For react-scripts
+    tty: true        # For react-scripts
